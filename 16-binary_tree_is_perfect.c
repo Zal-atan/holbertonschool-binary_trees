@@ -9,7 +9,7 @@
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int leftCheck = 1, rightCheck = 1, leftCounter = 0, rightCounter = 0;
+	int leftCheck = 1, rightCheck = 1;
 
 	if (tree == NULL)
 		return (0);
@@ -18,22 +18,19 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 		return (0);
 
 	if (tree->left)
-	{
-		leftCounter += 1;
 		leftCheck = binary_tree_is_perfect(tree->left);
-	}
 
 	if (tree->right)
-	{
-		rightCounter += 1;
 		rightCheck = binary_tree_is_perfect(tree->right);
-	}
+
+	if (!tree->right && !tree->left && !tree->parent)
+		return (1);
 
 	if (!tree->right && !tree->left)
 		return (2);
 
 	if (rightCheck == leftCheck)
-		return(1);
+		return (1);
 
 	if (leftCheck == 0 || rightCheck == 0 || leftCheck != rightCheck)
 		return (0);
